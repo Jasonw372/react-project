@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Preview</title>
+</head>
+<body>
+<script>
+  window.addEventListener("error", e => {
+    window.parent.postMessage({type: "ERROR", message: e.message})
+  })
+  // 没有异常时，发送消息
+  window.addEventListener("load", () => {
+    window.parent.postMessage({type: "LOADED"})
+  })
+</script>
+<script type="importmap"></script>
+<script type="module" id="appSrc"></script>
+<div id="root"></div>
+</body>
+</html>
