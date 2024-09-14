@@ -24,7 +24,7 @@ export interface PlaygroundContext {
   addFile: (name: string) => void
   removeFile: (name: string) => void
   updateFileName: (oldName: string, newName: string) => void
-  checkName: (name: string, oldName: string) => boolean
+  checkNameExist: (name: string, oldName: string) => boolean
 }
 
 export const PlaygroundContext = createContext<PlaygroundContext>({
@@ -46,6 +46,8 @@ export const PlaygroundProvider = ({children}: PropsWithChildren) => {
   }
   const [theme, setTheme] = useState<Theme>("light")
   const [files, setFiles] = useState<Files>(getFilesFromUrl() || initFiles)
+  // const [files, setFiles] = useState<Files>(initFiles)
+
   const [selectedFileName, setSelectedFileName] = useState("App.tsx")
   const addFile = (name: string) => {
     files[name] = {
@@ -60,7 +62,7 @@ export const PlaygroundProvider = ({children}: PropsWithChildren) => {
     delete files[name]
     setFiles({...files})
   }
-  const checkName = (name: string, oldName: string) => {
+  const checkNameExist = (name: string, oldName: string) => {
     return Object.keys(files).some((key) => key !== oldName && key === name)
   }
 
@@ -95,7 +97,7 @@ export const PlaygroundProvider = ({children}: PropsWithChildren) => {
         addFile,
         removeFile,
         updateFileName,
-        checkName
+        checkNameExist
       }}
     >
       {children}

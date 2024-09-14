@@ -10,6 +10,9 @@ export default function CodeEditor() {
 
   function onEditorChange(value?: string) {
     files[file.name].value = value!
+    if (file.name.endsWith("less")) {
+      console.log("编译less")
+    }
     setFiles({...files})
   }
 

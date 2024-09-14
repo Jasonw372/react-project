@@ -2,7 +2,6 @@ import {transform} from "@babel/standalone";
 import {Files, File} from "../../PlaygroundContext.tsx";
 import {ENTRY_FILE_NAME} from "../../files.ts";
 import {PluginObj} from "@babel/core";
-import {set} from "lodash-es";
 
 export const beforeTransformCode = (filename: string, code: string) => {
   let _code = code
@@ -66,7 +65,6 @@ const css2js = (file: File) => {
 })()`
   return URL.createObjectURL(new Blob([js], {type: "application/javascript"}))
 }
-
 function customResolver(files: Files): PluginObj {
   return {
     visitor: {
@@ -107,6 +105,4 @@ self.addEventListener('message', async ({data}) => {
   } catch (e) {
     self.postMessage({type: 'ERROR', error: e})
   }
-
-
 })

@@ -25,7 +25,7 @@ export const FileNameItem: React.FC<FileNameItemProps> = (props) => {
     onEditComplete,
     onRemove,
   } = props
-  const {files, checkName} = useContext(PlaygroundContext)
+  const {files, checkNameExist} = useContext(PlaygroundContext)
   const [name, setName] = useState(value)
   const [editing, setEditing] = useState(creating)
   const inputRef = useRef<HTMLInputElement>(null)
@@ -38,7 +38,7 @@ export const FileNameItem: React.FC<FileNameItemProps> = (props) => {
   }
 
   const handleInputBlur = () => {
-    if (checkName(name, oldName.current)) {
+    if (checkNameExist(name, oldName.current)) {
       message.error("文件重名，请重试")
       return
     }

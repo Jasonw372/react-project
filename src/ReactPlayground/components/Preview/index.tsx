@@ -1,7 +1,6 @@
 import {useContext, useEffect, useRef, useState} from "react";
 import {PlaygroundContext} from "../../PlaygroundContext.tsx";
 import CompilerWorker from "./compiler.worker?worker"
-
 import Editor from "../CodeEditor/Editor.tsx";
 import iframeRaw from "./iframe.html?raw"
 import {IMPORT_MAP_FILE_NAME} from "../../files.ts";
