@@ -9,12 +9,10 @@ export const fileName2Language = (fileName: string) => {
     case 'js':
     case 'jsx':
       return 'javascript'
+    case 'less':
+      return 'less'
     case 'css':
       return 'css'
-    case 'scss':
-      return 'scss'
-    case 'html':
-      return 'html'
     case 'json':
       return 'json'
     default:

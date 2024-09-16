@@ -1,5 +1,5 @@
 import importMap from './template/import-map.json?raw'
-import AppCss from './template/App.css?raw'
+import AppLess from './template/App.less?raw'
 import App from './template/App.tsx?raw'
 import main from './template/main.tsx?raw'
 import {Files} from "./PlaygroundContext.tsx";
@@ -20,10 +20,10 @@ export const initFiles: Files = {
     language: fileName2Language(APP_COMPONENT_FILE_NAME),
     value: App,
   },
-  'App.css': {
-    name: 'App.css',
-    language: 'css',
-    value: AppCss,
+  'App.less': {
+    name: 'App.less',
+    language: 'less',
+    value: AppLess,
   },
   [IMPORT_MAP_FILE_NAME]: {
     name: IMPORT_MAP_FILE_NAME,

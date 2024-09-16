@@ -1,3 +1,7 @@
+// less不支持多文件的变量和mixin的导入和导出，只能写在一个文件里
+@primary-color: red;
+@button-border-color: blue;
+
 :root {
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -28,6 +32,7 @@ body {
 body h1 {
     font-size: 3.2em;
     line-height: 1.1;
+    color: @primary-color;
 }
 
 body button {
@@ -43,7 +48,7 @@ body button {
 }
 
 body button:hover {
-    border-color: red;
+    border-color: @button-border-color;
 }
 
 body button:focus,

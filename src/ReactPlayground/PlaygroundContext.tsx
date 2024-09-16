@@ -7,6 +7,7 @@ export type Theme = 'light' | 'dark'
 export interface File {
   name: string,
   value: string,
+  babelResult?: { css: string },
   language: string
 }
 

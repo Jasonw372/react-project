@@ -2,6 +2,7 @@ import {transform} from "@babel/standalone";
 import {Files, File} from "../../PlaygroundContext.tsx";
 import {ENTRY_FILE_NAME} from "../../files.ts";
 import {PluginObj} from "@babel/core";
+import {renderLess} from "../../../lessLoder";
 
 export const beforeTransformCode = (filename: string, code: string) => {
   let _code = code
@@ -65,6 +66,22 @@ const css2js = (file: File) => {
 })()`
   return URL.createObjectURL(new Blob([js], {type: "application/javascript"}))
 }
+const less2js = (file: File) => {
+  const randomId = new Date().getTime()
+  const value = file.babelResult!.css
+  const js = `
+(() => {
+    const stylesheet = document.createElement('style')
+    stylesheet.setAttribute('id', 'style_${randomId}_${file.name}')
+    document.head.appendChild(stylesheet)
+
+    const styles = document.createTextNode(\`${value}\`)
+    stylesheet.innerHTML = ''
+    stylesheet.appendChild(styles)
+})()`
+  return URL.createObjectURL(new Blob([js], {type: "application/javascript"}))
+}
+
 function customResolver(files: Files): PluginObj {
   return {
     visitor: {
@@ -73,7 +90,9 @@ function customResolver(files: Files): PluginObj {
         if (modulePath.startsWith(".")) {
           const file = getModuleFile(files, modulePath)
           if (!file) return
-          if (file.name.endsWith(".css")) {
+          if (file.name.endsWith(".less")) {
+            path.node.source.value = less2js(file)
+          } else if (file.name.endsWith(".css")) {
             path.node.source.value = css2js(file)
           } else if (file.name.endsWith(".json")) {
             path.node.source.value = json2js(file)
@@ -90,14 +109,28 @@ function customResolver(files: Files): PluginObj {
   }
 }
 
-export const compile = (files: Files) => {
+async function prepareFiles(files: Files) {
+  for (const name in files) {
+    if (name.endsWith(".less")) {
+      try {
+        files[name].babelResult = await renderLess(files[name].value);
+      } catch (e) {
+        throw e
+      }
+    }
+  }
+  return files
+}
+
+export const compile = async (files: Files) => {
   const main = files[ENTRY_FILE_NAME]
+  await prepareFiles(files)
   return babelTransform(ENTRY_FILE_NAME, main.value, files)
 }
 
 self.addEventListener('message', async ({data}) => {
   try {
-    const res = compile(data)
+    const res = await compile(data)
     self.postMessage({
       type: 'COMPILED_CODE',
       data: res
