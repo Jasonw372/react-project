@@ -41,6 +41,9 @@ importers:
       classnames:
         specifier: ^2.5.1
         version: 2.5.1
+      copy-anything:
+        specifier: ^4.0.2
+        version: 4.0.2
       copy-to-clipboard:
         specifier: ^3.3.3
         version: 3.3.3
@@ -836,6 +839,10 @@ packages:
   copy-anything@2.0.6:
     resolution: {integrity: sha512-1j20GZTsvKNkc4BY3NpMOM8tt///wY3FpIzozTOFO2ffuZcV61nojHXVKIy3WM+7ADCy5FVhdZYHYDdgTU0yJw==}
 
+  copy-anything@4.0.2:
+    resolution: {integrity: sha512-c87DOYWkRP4gZybb8d4vedb8i8Yu13ukeZdbJArCqW8MiRig0b4Brq2fp5VPeva8l1AmOiXrRYFiQJO3mfolDg==}
+    engines: {node: '>=18'}
+
   copy-to-clipboard@3.3.3:
     resolution: {integrity: sha512-2KV8NhB5JqC3ky0r9PMCAZKbUHSwtEo4CwCs0KXgruG43gX5PMqDEBbVU4OUzw2MuAWUfsuFmWvEKG5QRfSnJA==}
 
@@ -1080,6 +1087,10 @@ packages:
 
   is-what@3.14.1:
     resolution: {integrity: sha512-sNxgpk9793nzSs7bA6JQJGeIuRBQhAaNGG77kzYQgMkrID+lS6SlK07K5LaptscDlSaIgH+GPFzf+d75FVxozA==}
+
+  is-what@5.0.2:
+    resolution: {integrity: sha512-vI7Ui0qzNQ2ClDZd0bC7uqRk3T1imbX5cZODmVlqqdqiwmSIUX3CNSiRgFjFMJ987sVCMSa7xZeEDtpJduPg4A==}
+    engines: {node: '>=18'}
 
   isarray@1.0.0:
     resolution: {integrity: sha512-VLghIWNM6ELQzo7zwmcg0NmTVyWKYjvIeM83yjp0wRDTmUnrM678fQbcKBo6n2CJEF0szoG//ytg+TKla89ALQ==}
@@ -2520,6 +2531,10 @@ snapshots:
     dependencies:
       is-what: 3.14.1
 
+  copy-anything@4.0.2:
+    dependencies:
+      is-what: 5.0.2
+
   copy-to-clipboard@3.3.3:
     dependencies:
       toggle-selection: 1.0.6
@@ -2765,6 +2780,8 @@ snapshots:
   is-path-inside@3.0.3: {}
 
   is-what@3.14.1: {}
+
+  is-what@5.0.2: {}
 
   isarray@1.0.0: {}
 
