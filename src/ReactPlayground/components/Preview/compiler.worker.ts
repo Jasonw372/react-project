@@ -14,14 +14,12 @@ export const beforeTransformCode = (filename: string, code: string) => {
 }
 export const babelTransform = (filename: string, code: string, files: Files) => {
   const _code = beforeTransformCode(filename, code);
-  let result = transform(_code, {
+  return transform(_code, {
     presets: ['react', 'typescript'],
     filename,
     plugins: [customResolver(files)],
     retainLines: true
   }).code!
-
-  return result
 }
 
 const getModuleFile = (files: Files, modulePath: string): File => {
