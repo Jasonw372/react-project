@@ -103,7 +103,11 @@ function customResolver(files: Files): PluginObj {
 }
 
 async function prepareFiles(files: Files) {
+<<<<<<< HEAD
   const processFiles = async (files: Files) => {
+=======
+  const processFiles = async (files:Files) => {
+>>>>>>> ccd46e6 (less fix)
     const filePromises = Object.keys(files).map(async (name) => {
       if (name.endsWith(".less")) {
         files[name].babelResult = await renderLess(files[name].value);
@@ -114,6 +118,11 @@ async function prepareFiles(files: Files) {
     await Promise.all(filePromises);
     return files;
   };
+<<<<<<< HEAD
+=======
+
+  return await processFiles(files);
+>>>>>>> ccd46e6 (less fix)
 }
 
 export const compile = async (files: Files) => {
