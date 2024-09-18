@@ -14,17 +14,12 @@ export const beforeTransformCode = (filename: string, code: string) => {
 }
 export const babelTransform = (filename: string, code: string, files: Files) => {
   const _code = beforeTransformCode(filename, code);
-  let result = ""
-  try {
-    result = transform(_code, {
-      presets: ['react', 'typescript'],
-      filename,
-      plugins: [customResolver(files)],
-      retainLines: true
-    }).code!
-  } catch (e) {
-    throw e
-  }
+  let result = transform(_code, {
+    presets: ['react', 'typescript'],
+    filename,
+    plugins: [customResolver(files)],
+    retainLines: true
+  }).code!
 
   return result
 }
@@ -110,16 +105,17 @@ function customResolver(files: Files): PluginObj {
 }
 
 async function prepareFiles(files: Files) {
-  for (const name in files) {
-    if (name.endsWith(".less")) {
-      try {
+  const processFiles = async (files: Files) => {
+    const filePromises = Object.keys(files).map(async (name) => {
+      if (name.endsWith(".less")) {
         files[name].babelResult = await renderLess(files[name].value);
-      } catch (e) {
-        throw e
       }
-    }
-  }
-  return files
+      return files[name];
+    });
+
+    await Promise.all(filePromises);
+    return files;
+  };
 }
 
 export const compile = async (files: Files) => {
