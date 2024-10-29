@@ -1,5 +1,5 @@
 import MonacoEditor, {EditorProps, OnMount} from '@monaco-editor/react'
-import {editor} from "monaco-editor"
+import { editor } from "monaco-editor";
 import {createATA} from "./Editor/ata.ts";
 
 export interface EditorFile {

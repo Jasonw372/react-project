@@ -28,6 +28,7 @@
     "jszip": "^3.10.1",
     "less": "^4.2.0",
     "lodash-es": "^4.17.21",
+    "monaco-editor": "^0.52.0",
     "parse-node-version": "^2.0.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
