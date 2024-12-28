@@ -71,6 +71,7 @@ export default function Preview() {
     // eslint-disable-next-line
   }, [files[IMPORT_MAP_FILE_NAME].value, compiledCode]);
 
+  console.log("123")
 
   return <div style={{height: "100%"}}>
     <iframe
